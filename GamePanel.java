@@ -21,9 +21,10 @@ public class GamePanel extends JPanel implements  Runnable {
     Paddles paddle2;
     Ball ball;
     Score score;
-
+    int winCondition = 10;
     PaddlesAI paddlesAI;
 
+    boolean paused;
 
     
     GamePanel(){
@@ -121,12 +122,32 @@ public class GamePanel extends JPanel implements  Runnable {
             score.player2++;
             newPaddles();
             newBall();
+            checkWinner();
         }
         if(ball.x >= (GAME_WIDTH - BALL_DIAMETER)){
             score.player1++;
             newPaddles();
             newBall();
+            checkWinner();
         }
+    }
+     public void setWinCondition(int winScore) {
+    this.winCondition = winScore;
+    }
+
+    public void checkWinner(){
+        if(score.player1 >= winCondition){
+            JOptionPane.showMessageDialog(this, "Player 1 Wins");
+            System.exit(0);
+        }
+        if(score.player2 >= winCondition){
+            JOptionPane.showMessageDialog(this, "AI Wins");
+            System.exit(0);
+        }
+    }
+
+    public void setPaused(boolean val){
+        this.paused = val;
     }
 
     public void run(){
@@ -140,10 +161,13 @@ public class GamePanel extends JPanel implements  Runnable {
             delta +=(now-lastTime)/ns;
             lastTime=now;
             if(delta>=1){
+                if(!paused){
                 move();
                 checkCollision();
+                checkWinner();
                 repaint();
                 delta--;
+                }
             }
         }
 

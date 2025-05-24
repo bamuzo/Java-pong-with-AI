@@ -9,7 +9,7 @@ public class GameFrame extends JFrame implements ActionListener {
 
     JMenuItem PvP;
     JMenuItem PvA;
-
+    JMenuItem WinCon;
     GameFrame() {
         this.setTitle("Pongo");
         this.setResizable(false);
@@ -33,6 +33,10 @@ public class GameFrame extends JFrame implements ActionListener {
         JMenuBar menuBar = new JMenuBar(); // adds the menu bar thing on top
         PvP = new JMenuItem("Player vs Player"); // names the item inside the menubar
         PvA = new JMenuItem("Player vs AI"); // ^^ same deal
+       
+        JMenu WinConMenu = new JMenu("Set Win Condition"); // to set win condition
+        WinCon = new JMenuItem("Win Condition");
+        WinConMenu.add(WinCon);
 
         JMenu gameMenu = new JMenu("Game Type"); // menu bar button to show the items listed ^^
         gameMenu.add(PvP); // adds to game type bar
@@ -40,7 +44,9 @@ public class GameFrame extends JFrame implements ActionListener {
 
         PvP.addActionListener(this); // makes it so that it can listen to the input
         PvA.addActionListener(this);
+        WinCon.addActionListener(this);
 
+        menuBar.add(WinConMenu);
         menuBar.add(gameMenu);
         this.setJMenuBar(menuBar);
     }
@@ -54,7 +60,37 @@ public class GameFrame extends JFrame implements ActionListener {
         } else if (e.getSource() == PvA) {
             aiPanel = new GamePanel(); // load p v ai
             currentPanel = aiPanel;
+        } else if (e.getSource() == WinCon) {       
+    // Pause the current panel
+    if (currentPanel instanceof GamePanel) {
+        ((GamePanel) currentPanel).setPaused(true);
+    } else if (currentPanel instanceof GamePanelPVP) {
+        ((GamePanelPVP) currentPanel).setPaused(true);
+    }
+
+    // Show input dialog
+    String input = JOptionPane.showInputDialog(this, "Enter win condition (e.g. 5):");
+
+    try {
+        int winScore = Integer.parseInt(input);
+        if (currentPanel instanceof GamePanel) {
+            ((GamePanel) currentPanel).setWinCondition(winScore);
+        } else if (currentPanel instanceof GamePanelPVP) {
+            ((GamePanelPVP) currentPanel).setWinCondition(winScore);
         }
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "Invalid number format. Try again.");
+    }
+
+    // Resume the game
+    if (currentPanel instanceof GamePanel) {
+        ((GamePanel) currentPanel).setPaused(false);
+    } else if (currentPanel instanceof GamePanelPVP) {
+        ((GamePanelPVP) currentPanel).setPaused(false);
+    }
+}
+
+
 
         this.add(currentPanel, BorderLayout.CENTER);
         this.revalidate();
