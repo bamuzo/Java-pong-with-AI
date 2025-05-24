@@ -15,15 +15,15 @@ public class GameFrame extends JFrame implements ActionListener {
         this.setResizable(false);
         this.setBackground(Color.black);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLayout(new BorderLayout()); // Required to swap CENTER panel
-        this.setSize(1000, 600); // Default size before pack
+        this.setLayout(new BorderLayout()); // need it to change the layout (choose between AI and PVP)
+        this.setSize(1000, 600); // default size
 
-        // Initial panel (PvP by default)
+        // makes the starting panel PVP
         pvpPanel = new GamePanelPVP();
         currentPanel = pvpPanel;
         this.add(currentPanel, BorderLayout.CENTER);
 
-        createMenuBar();
+        createMenuBar(); //creates the menu bar to choose
 
         this.setVisible(true);
         this.setLocationRelativeTo(null);
