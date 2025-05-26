@@ -178,7 +178,7 @@ public class GamePanelPVP extends JPanel implements  Runnable {
         }
 
     }
-
+    
     public class AL extends KeyAdapter{
         public void keyPressed(KeyEvent e){
             paddle1.keyPressed(e);
