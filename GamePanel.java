@@ -146,9 +146,6 @@ public class GamePanel extends JPanel implements  Runnable {
             JOptionPane.showMessageDialog(this, "AI Wins");
             playerName = JOptionPane.showInputDialog(this, "Enter your name to save the score:");
             lb.addPlayer(playerName, score.player1);
-
-            System.out.println("Player1 (You) Score: " + score.player1);
-            System.out.println("Player2 (AI) Score: " + score.player2);
             System.exit(0);
 
         }
