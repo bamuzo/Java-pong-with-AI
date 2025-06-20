@@ -21,7 +21,7 @@ public class GamePanelPVP extends JPanel implements  Runnable {
     Paddles paddle2;
     Ball ball;
     Score score;
-    int winCondition = 10;
+    int winCondition = 10000000;
     boolean gameRun;
     boolean paused;
 
@@ -152,6 +152,11 @@ public class GamePanelPVP extends JPanel implements  Runnable {
             JOptionPane.showMessageDialog(this, "Player 2 Wins");
             System.exit(0);
         }
+    }
+
+    public void resetScore(){
+            score.player1 = 0;
+            score.player2 = 0;
     }
 
    

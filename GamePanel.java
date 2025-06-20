@@ -21,8 +21,12 @@ public class GamePanel extends JPanel implements  Runnable {
     Paddles paddle2;
     Ball ball;
     Score score;
-    int winCondition = 10;
+    int winCondition = 1000000000;
+    int winConditionAI = 3;
     PaddlesAI paddlesAI;
+    String playerName;
+    leaderboard lb;
+    
 
     boolean paused;
 
@@ -30,6 +34,8 @@ public class GamePanel extends JPanel implements  Runnable {
     GamePanel(){
         newBall();
         newPaddles();
+
+        lb = new leaderboard();
 
         score = new Score(GAME_WIDTH ,GAME_HEIGHT);
         this.setFocusable(true);
@@ -136,19 +142,22 @@ public class GamePanel extends JPanel implements  Runnable {
     }
 
     public void checkWinner(){
-        if(score.player1 >= winCondition){
-            JOptionPane.showMessageDialog(this, "Player 1 Wins");
-            System.exit(0);
-        }
-        if(score.player2 >= winCondition){
+        if(score.player2 >= winConditionAI){
             JOptionPane.showMessageDialog(this, "AI Wins");
+            playerName = JOptionPane.showInputDialog(this, "Enter your name to save the score:");
+            lb.addPlayer(playerName, score.player1);
+
+            System.out.println("Player1 (You) Score: " + score.player1);
+            System.out.println("Player2 (AI) Score: " + score.player2);
             System.exit(0);
+
         }
     }
 
     public void setPaused(boolean val){
         this.paused = val;
     }
+
 
     public void run(){
         //the game loop
@@ -161,13 +170,13 @@ public class GamePanel extends JPanel implements  Runnable {
             delta +=(now-lastTime)/ns;
             lastTime=now;
             if(delta>=1){
-                if(!paused){
+               
                 move();
                 checkCollision();
                 checkWinner();
                 repaint();
                 delta--;
-                }
+                
             }
         }
 
@@ -183,5 +192,11 @@ public class GamePanel extends JPanel implements  Runnable {
             paddle1.keyReleased(e);
             paddle2.keyReleased(e);
         }
+        
+    }
+
+    public void resetScore(){
+        score.player1 = 0;
+        score.player2 = 0;
     }
 }
