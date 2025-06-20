@@ -11,18 +11,17 @@ public class Ball extends Rectangle {
     
     
     Ball(int x, int y, int width, int height){
-        super(x,y,width,height);
-        random = new Random();
-        int randomXDirection = random.nextInt(2);
-        if(randomXDirection == 0)
-            randomXDirection--;
-        setXDirection(randomXDirection*initialSpeed);
-        int randomYDirection = random.nextInt(2);
-        if(randomYDirection == 0)
-            randomYDirection++;
-        setYDirection(randomYDirection*initialSpeed);
+    super(x,y,width,height);
+    random = new Random();
+    // fixed to change how the ball moves, made it actually random
+    // instead of always going to the right and down or left and down
+    int randomXDirection = random.nextBoolean() ? 1 : -1;
+    setXDirection(randomXDirection * initialSpeed);
+    
+    int randomYDirection = random.nextBoolean() ? 1 : -1;
+    setYDirection(randomYDirection * initialSpeed);
+}
 
-    }
 
     public void setXDirection(int randomXDirection){
         xVelo = randomXDirection;
