@@ -3,34 +3,32 @@ import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
 
-public class GamePanel extends JPanel implements  Runnable {
+public class GamePanel extends JPanel implements Runnable {
     
-    static final int GAME_WIDTH = 1000;
-    static final int GAME_HEIGHT = (int)(GAME_WIDTH * (0.5555));
-    static final Dimension SCREEN_SIZE = new Dimension(GAME_WIDTH,GAME_HEIGHT);
-    static final int BALL_DIAMETER = 20;
+    public static final int GAME_WIDTH = 1000;
+    public static final int GAME_HEIGHT = (int)(GAME_WIDTH * (0.5555));
+    private static final Dimension SCREEN_SIZE = new Dimension(GAME_WIDTH,GAME_HEIGHT);
+    private static final int BALL_DIAMETER = 20;
 
-    static final int PADDLE_WIDTH = 25;
-    static final int PADDLE_HEIGHT = 100;
+    private static final int PADDLE_WIDTH = 25;
+    private static final int PADDLE_HEIGHT = 100;
 
-    Thread gameThread;
-    Image image;
-    Graphics graphics;
-    Random random;
-    Paddles paddle1;
-    Paddles paddle2;
-    Ball ball;
-    Score score;
-    int winCondition = 1000000000;
-    int winConditionAI = 3;
-    PaddlesAI paddlesAI;
-    String playerName;
-    leaderboard lb;
-    
+    private Thread gameThread;
+    private Image image;
+    private Graphics graphics;
+    private Random random;
+    private Paddles paddle1;
+    private Paddles paddle2;
+    private Ball ball;
+    private Score score;
+    private int winCondition = 1000000000;
+    private int winConditionAI = 3;
+    private PaddlesAI paddlesAI;
+    private String playerName;
+    private leaderboard lb;
 
-    boolean paused;
+    private boolean paused;
 
-    
     GamePanel(){
         newBall();
         newPaddles();
@@ -146,6 +144,8 @@ public class GamePanel extends JPanel implements  Runnable {
             JOptionPane.showMessageDialog(this, "AI Wins");
             playerName = JOptionPane.showInputDialog(this, "Enter your name to save the score:");
             lb.addPlayer(playerName, score.player1);
+
+            
             System.exit(0);
 
         }

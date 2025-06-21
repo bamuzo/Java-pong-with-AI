@@ -2,13 +2,28 @@ import java.awt.*;
 import java.io.*;
 import javax.swing.JPanel;
 
-class Player implements Comparable<Player> {
-    private String name;
-    private int score;
 
-    public Player(String name, int score) {
+abstract class Players { 
+    protected String name;
+    protected int score;
+
+    public Players(String name, int score) {
         this.name = name.length() > 3 ? name.substring(0, 3) : name; // takes the first 3 letters of the players name
         this.score = score;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getScore() {
+        return score;
+    }
+}
+class Player extends Players implements Comparable<Player> {
+
+    public Player(String name, int score) {
+        super(name, score);
     }
 
     public String getName() {

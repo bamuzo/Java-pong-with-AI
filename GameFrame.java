@@ -3,16 +3,16 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class GameFrame extends JFrame implements ActionListener {
-    GamePanel aiPanel;
-    GamePanelPVP pvpPanel;
-    leaderboard leaderboardPanel;
-    JPanel currentPanel;
+    private GamePanel aiPanel;
+    private GamePanelPVP pvpPanel;
+    private leaderboard leaderboardPanel;
+    private JPanel currentPanel;
 
-    JMenuItem PvP;
-    JMenuItem PvA;
-    JMenuItem WinCon;
-    JMenuItem viewLeaderboardItem;
-    GameFrame() {
+    private JMenuItem PvP;
+    private JMenuItem PvA;
+    private JMenuItem WinCon;
+    private JMenuItem viewLeaderboardItem;
+    public GameFrame() {
         this.setTitle("Pongo");
         this.setResizable(false);
         this.setBackground(Color.black);
@@ -31,7 +31,7 @@ public class GameFrame extends JFrame implements ActionListener {
         this.setLocationRelativeTo(null);
     }
 
-    void createMenuBar() {
+    private void createMenuBar() {
         JMenuBar menuBar = new JMenuBar(); // adds the menu bar thing on top
         PvP = new JMenuItem("Player vs Player"); // names the item inside the menubar
         PvA = new JMenuItem("Player vs AI"); // ^^ same deal

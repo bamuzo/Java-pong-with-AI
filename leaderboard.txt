@@ -1,4 +1,7 @@
+ham 11
 bam 9
+bal 4
+man 4
 bam 3
 abd 3
 bam 3
