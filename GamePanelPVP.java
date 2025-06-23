@@ -138,6 +138,7 @@ public class GamePanelPVP extends JPanel implements  Runnable {
     
     public void setWinCondition(int winScore) {
     this.winCondition = winScore;
+    resetScore();
     }
     public void setPaused(boolean val){
         this.paused = val;
