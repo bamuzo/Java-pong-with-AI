@@ -94,7 +94,7 @@ public class GamePanel extends JPanel implements Runnable {
             paddle1.y = (GAME_HEIGHT-PADDLE_HEIGHT);
 
         }
-
+        // random comment to check for push
         if(paddlesAI.y <=0){
             paddlesAI.y=0;
         }
